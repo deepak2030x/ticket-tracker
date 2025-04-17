@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 // import { initialTickets } from "@/data";
 import { TicketItem } from "@/features/ticket/components/ticket-item";
-import { getTickets } from "@/features/ticket/queries/get-tickets";
+import { getTicket } from "@/features/ticket/queries/get-ticket";
 
 type TicketPageProps = {
   params: Promise<{
@@ -13,8 +13,7 @@ type TicketPageProps = {
 const TicketPage = async ({ params }: TicketPageProps) => {
   const { ticketId } = await params;
   // const ticket = initialTickets.find((ticket) => ticket.id === ticketId);
-  const tickets = await getTickets();
-  const ticket = tickets.find((ticket) => ticket.id === ticketId);
+  const ticket = await getTicket(ticketId);
 
   if (!ticket) {
     notFound();
